@@ -13,7 +13,7 @@
 
 ## simple
 
-![yapi2ts_simple](https:www.github.com/cysgg/yapi2ts/assets/img/yapi2ts.jpg)
+![yapi2ts_simple](https://github.com/cysgg/yapi2ts/blob/main/src/assets/img/yapi2ts.jpg)
 
 ## by the way
 

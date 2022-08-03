@@ -1,8 +1,11 @@
 {
   "name": "yapi2ts",
   "displayName": "yapi2ts",
-  "description": "",
+  "description": "a yapi to ts file extension",
   "version": "0.0.1",
+	"license": "MIT",
+  "publisher": "cysgg",
+  "repository": "https://github.com/cysgg/yapi2ts",
   "engines": {
     "vscode": "^1.69.0"
   },
