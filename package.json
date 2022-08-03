@@ -1,0 +1,190 @@
+{
+  "name": "yapi2ts",
+  "displayName": "yapi2ts",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.69.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:yapi2ts.login",
+    "onCommand:yapi2ts.search",
+    "onCommand:yapiTree.refresh",
+    "onCommand:yapiTree.resetProjectData",
+    "onCommand:yapiTree.itemCopy",
+    "onCommand:yapiTree.exportInterface",
+    "onCommand:yapiTree.viewInterface",
+    "onView:yapiTree"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "yapi2ts",
+      "properties": {
+        "yapi2ts.project.id": {
+          "type": "string",
+          "default": "2925",
+          "description": "yapi项目id, 例如: iFind Java项目id为 2925, 更改后需重启vscode"
+        },
+        "yapi2ts.login.username": {
+          "type": "string",
+          "default": "",
+          "description": "login yapi username"
+        },
+        "yapi2ts.login.password": {
+          "type": "string",
+          "default": "",
+          "description": "login yapi password"
+        },
+        "yapi2ts.yapi.origin": {
+          "type": "string",
+          "default": "http://software.myhexin.com",
+          "description": "yapi mock root origin, eg: 'http://www.yapi.com'"
+        },
+        "yapi2ts.export.exportRootDirName": {
+          "type": "string",
+          "default": "/src/api",
+          "description": "导出yapi2ts类型声明文件到本地的目录地址"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "yapi2ts",
+          "title": "yapi2ts",
+          "icon": "src/assets/icon/api.png"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "yapiTree",
+        "contents": "初始化中，或没有登录\n[登录](command:yapi2ts.login)"
+      }
+    ],
+    "views": {
+      "yapi2ts": [
+        {
+          "id": "yapiTree",
+          "name": "yapiTree",
+          "icon": "src/assets/icon/api.png",
+          "contextualTitle": "yapiTree"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "yapiTree.refresh",
+          "when": "view == yapiTree",
+          "group": "navigation"
+        },
+        {
+          "command": "yapi2ts.login",
+          "when": "view == yapiTree",
+          "group": "navigation"
+        },
+        {
+          "command": "yapi2ts.search",
+          "when": "view == yapiTree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "yapiTree.itemCopy",
+          "when": "view == yapiTree && viewItem == interface",
+          "group": "inline"
+        },
+        {
+          "command": "yapiTree.exportInterface",
+          "when": "view == yapiTree && viewItem in yapiTree.exportItemList",
+          "group": "inline"
+        },
+        {
+          "command": "yapiTree.viewInterface",
+          "when": "view == yapiTree && viewItem == list",
+          "group": "inline"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "yapi2ts.login",
+        "title": "登录",
+        "icon": "src/assets/svg/login.svg"
+      },
+      {
+        "command": "yapiTree.refresh",
+        "title": "刷新",
+        "icon": "src/assets/svg/refresh.svg"
+      },
+      {
+        "command": "yapi2ts.search",
+        "title": "项目内搜索分组/接口",
+        "icon": {
+          "dark": "src/assets/icon/search-dark.png",
+          "light": "src/assets/icon/search-light.png"
+        }
+      },
+      {
+        "command": "yapiTree.resetProjectData",
+        "title": "重设项目名"
+      },
+      {
+        "command": "yapiTree.itemCopy",
+        "title": "复制",
+        "icon": {
+          "dark": "src/assets/icon/copy-dark.png",
+          "light": "src/assets/icon/copy-light.png"
+        }
+      },
+      {
+        "command": "yapiTree.exportInterface",
+        "title": "声明文件导出到本地",
+        "icon": {
+          "dark": "src/assets/icon/download-dark.png",
+          "light": "src/assets/icon/download-light.png"
+        }
+      },
+      {
+        "command": "yapiTree.viewInterface",
+        "title": "声明文件预览",
+        "icon": {
+          "dark": "src/assets/icon/view-dark.png",
+          "light": "src/assets/icon/view-light.png"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.69.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^7.32.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "moment": "^2.29.4",
+    "uppercamelcase": "^3.0.0"
+  }
+}
