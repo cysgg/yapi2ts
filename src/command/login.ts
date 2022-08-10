@@ -3,6 +3,7 @@ import config from "../config/index";
 import axios from "axios";
 import * as fs from "fs";
 import path = require("path");
+import { showStatusBar } from "./init";
 
 const { yapi_login_url } = config;
 
@@ -38,7 +39,7 @@ const insetPassword = function ():
   });
 };
 
-export default function () {
+export default function (statusItem: vscode.StatusBarItem) {
   (insetUsername() as any).then((username: string) => {
     (insetPassword() as any).then((password: string) => {
       axios
@@ -64,6 +65,7 @@ export default function () {
             const uri = path.resolve(__dirname, "../utils/cookie.txt");
             fs.writeFileSync(uri, cookieStr);
             vscode.commands.executeCommand("yapiTree.refresh");
+            showStatusBar(statusItem);
           }
         });
     });

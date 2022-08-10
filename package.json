@@ -2,15 +2,19 @@
   "name": "yapi2ts",
   "displayName": "yapi2ts",
   "description": "a yapi to ts file extension",
-  "version": "0.0.1",
-	"license": "MIT",
+  "version": "0.0.4",
+  "license": "MIT",
   "publisher": "cysgg",
   "repository": "https://github.com/cysgg/yapi2ts",
   "engines": {
     "vscode": "^1.69.0"
   },
+  "contributors": [
+    "zphl"
+  ],
   "categories": [
-    "Other"
+    "yapi",
+    "typescript"
   ],
   "activationEvents": [
     "onCommand:yapi2ts.login",
@@ -40,6 +44,7 @@
         "yapi2ts.login.password": {
           "type": "string",
           "default": "",
+          "contentMediaType": "password",
           "description": "login yapi password"
         },
         "yapi2ts.yapi.origin": {
@@ -59,7 +64,7 @@
         {
           "id": "yapi2ts",
           "title": "yapi2ts",
-          "icon": "src/assets/icon/api.png"
+          "icon": "assets/icon/api.png"
         }
       ]
     },
@@ -74,7 +79,7 @@
         {
           "id": "yapiTree",
           "name": "yapiTree",
-          "icon": "src/assets/icon/api.png",
+          "icon": "assets/icon/api.png",
           "contextualTitle": "yapiTree"
         }
       ]
@@ -119,19 +124,19 @@
       {
         "command": "yapi2ts.login",
         "title": "登录",
-        "icon": "src/assets/svg/login.svg"
+        "icon": "assets/svg/login.svg"
       },
       {
         "command": "yapiTree.refresh",
         "title": "刷新",
-        "icon": "src/assets/svg/refresh.svg"
+        "icon": "assets/svg/refresh.svg"
       },
       {
         "command": "yapi2ts.search",
         "title": "项目内搜索分组/接口",
         "icon": {
-          "dark": "src/assets/icon/search-dark.png",
-          "light": "src/assets/icon/search-light.png"
+          "dark": "assets/icon/search-dark.png",
+          "light": "assets/icon/search-light.png"
         }
       },
       {
@@ -142,24 +147,24 @@
         "command": "yapiTree.itemCopy",
         "title": "复制",
         "icon": {
-          "dark": "src/assets/icon/copy-dark.png",
-          "light": "src/assets/icon/copy-light.png"
+          "dark": "assets/icon/copy-dark.png",
+          "light": "assets/icon/copy-light.png"
         }
       },
       {
         "command": "yapiTree.exportInterface",
         "title": "声明文件导出到本地",
         "icon": {
-          "dark": "src/assets/icon/download-dark.png",
-          "light": "src/assets/icon/download-light.png"
+          "dark": "assets/icon/download-dark.png",
+          "light": "assets/icon/download-light.png"
         }
       },
       {
         "command": "yapiTree.viewInterface",
         "title": "声明文件预览",
         "icon": {
-          "dark": "src/assets/icon/view-dark.png",
-          "light": "src/assets/icon/view-light.png"
+          "dark": "assets/icon/view-dark.png",
+          "light": "assets/icon/view-light.png"
         }
       }
     ]

@@ -1,5 +1,7 @@
 import * as fs from "fs";
+import * as vscode from "vscode";
 import path = require("path");
+import { getYapiProjectInfoData } from "./yapi-data";
 
 function removeDir(dir: string) {
   let files = fs.readdirSync(dir);
@@ -17,12 +19,27 @@ function removeDir(dir: string) {
   fs.rmdirSync(dir); //如果文件夹是空的，就将自己删除掉
 }
 
-const initExtends = function () {
+export const showStatusBar = async function (statusItem: vscode.StatusBarItem) {
+  const vsConfig = vscode.workspace.getConfiguration("yapi2ts");
+  const pId = vsConfig.get("project.id");
+  const res: any = await getYapiProjectInfoData(pId as number);
+  if (res) {
+    const { group_name } = res;
+
+    statusItem.text = `yapi2ts: ${group_name}`;
+    statusItem.tooltip = `yapi projectId: ${pId}`;
+    statusItem.show();
+  }
+};
+
+const initExtends = function (statusItem: vscode.StatusBarItem) {
   const uri = path.resolve(__dirname, "../interfaces-view");
 
   if (fs.existsSync(uri)) {
     removeDir(uri);
   }
+
+  showStatusBar(statusItem);
 };
 
 export default initExtends;

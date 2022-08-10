@@ -139,7 +139,7 @@ export default class YapiTree implements vscode.TreeDataProvider<YapiItem> {
     return [];
   }
   async _getYapiInterfaceData(element?: YapiItem): Promise<YapiItem[]> {
-    const { yid } = element!;
+    const { yid, id } = element!;
     const data = await getYapiInterfaceData(yid);
     const vsConfig = vscode.workspace.getConfiguration("yapi2ts");
     const origin = vsConfig.get("yapi.origin");
@@ -182,13 +182,20 @@ export default class YapiTree implements vscode.TreeDataProvider<YapiItem> {
 
         const toolTip = `${label}:${val}`;
 
-        return new YapiItem(label, collapsState, 4, index, toolTip, val);
+        return new YapiItem(
+          label,
+          collapsState,
+          4,
+          parseInt(id! + index),
+          toolTip,
+          val
+        );
       });
     }
     return [];
   }
   _getInterfaceQueryData(data: YapiInterfaceRes) {
-    const { method } = data;
+    const { method, _id } = data;
     const children = [
       {
         name: "headers",
@@ -204,14 +211,14 @@ export default class YapiTree implements vscode.TreeDataProvider<YapiItem> {
       "请求参数",
       vscode.TreeItemCollapsibleState.None,
       4,
-      7,
+      parseInt(_id.toString() + 7),
       "请求参数",
       "",
       children
     );
   }
   _getInterfaceBodyData(data: YapiInterfaceRes) {
-    const { res_body } = data;
+    const { res_body, _id } = data;
 
     const parseResBody = JSON.parse(res_body || "{}");
     console.log(parseResBody);
@@ -221,13 +228,13 @@ export default class YapiTree implements vscode.TreeDataProvider<YapiItem> {
       "返回数据",
       vscode.TreeItemCollapsibleState.None,
       4,
-      8,
+      parseInt(_id.toString() + 8),
       "返回数据",
       ""
     );
   }
   _getInterfaceChildren(element: YapiItem) {
-    const { label, children } = element;
+    const { label, children, id } = element;
 
     if (label === "请求参数") {
       return children.map((child: any, index: number) => {
@@ -262,7 +269,7 @@ export default class YapiTree implements vscode.TreeDataProvider<YapiItem> {
           name,
           vscode.TreeItemCollapsibleState.Expanded,
           5,
-          index,
+          parseInt(id! + index),
           name,
           "",
           reqQueryChildrens

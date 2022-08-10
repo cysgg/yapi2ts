@@ -13,8 +13,15 @@ import { resetProjectData } from "./command/yapi-data";
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  initExtends();
-  
+  const myStatusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Left,
+    100
+  );
+
+  context.subscriptions.push(myStatusBarItem);
+
+  initExtends(myStatusBarItem);
+
   vscode.commands.executeCommand("setContext", "yapiTree.exportItemList", [
     "group",
     "list",
@@ -29,7 +36,10 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  const loginCmd = vscode.commands.registerCommand("yapi2ts.login", login);
+  const loginCmd = vscode.commands.registerCommand("yapi2ts.login", () =>
+    login(myStatusBarItem)
+  );
+
   context.subscriptions.push(loginCmd);
 
   const resetProjectDataCdm = vscode.commands.registerCommand(
@@ -64,6 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
   const searchCmd = vscode.commands.registerCommand("yapi2ts.search", () =>
     search()
   );
+
   context.subscriptions.push(searchCmd);
 }
 

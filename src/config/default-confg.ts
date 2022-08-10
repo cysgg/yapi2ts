@@ -5,7 +5,7 @@ const projectId: number = vsConfig.get("project.id")!;
 const origin = vsConfig.get("yapi.origin");
 
 const defaultConfig = {
-  treeProjectId: 3584,
+  treeProjectId: 0,
   treeCatId: 0,
   treeInterfaceId: 0,
   type_str: "type",
@@ -19,7 +19,7 @@ const defaultConfig = {
   yapi_login_url: `${origin}/yapi/api/user/login`,
   yapi_list_cat_url: `${origin}/yapi/api/interface/list_cat`,
   yapi_menu_new_url: `${origin}/yapi/api/interface/list_menu_new`,
-  yapi_project_info_url: `${origin}/yapi/api/project/get`,
+  yapi_project_info_url: `${origin}/yapi/api/group/get`,
   yapi_project_list_url: `${origin}/yapi/api/project/list`,
   yapi_search_url: `${origin}/yapi/api/project/search`,
   projectId: projectId,
